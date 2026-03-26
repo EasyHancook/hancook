@@ -640,44 +640,53 @@
             let shortsFeedbackHtml = '';
             if (item.video_url && item.video_url.trim() !== '') {
                 shortsFeedbackHtml = `
-                    <div class="mt-12 mb-8 p-8 bg-indigo-50 rounded-[2.5rem] border border-indigo-100 shadow-sm">
+                    <div class="mt-12 mb-8 p-6 md:p-8 bg-indigo-50 rounded-[2.5rem] border border-indigo-100 shadow-sm">
                         <div class="text-center mb-6">
-                            <h3 class="font-display font-bold text-2xl text-indigo-900 mb-2">Ready to cook? 🎬</h3>
-                            <p class="text-sm text-indigo-700">After watching the video, do you feel confident about these 3 goals?</p>
-                            <a href="${item.video_url}" target="_blank" class="inline-flex items-center gap-2 mt-4 px-5 py-2.5 bg-white text-red-600 font-bold rounded-xl shadow-sm border border-red-100 hover:bg-red-50 transition-colors text-sm">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            <h3 class="font-display font-bold text-xl md:text-2xl text-indigo-900 mb-2">Ready to cook? 🎬</h3>
+                            <p class="text-xs md:text-sm text-indigo-700">After watching the video, do you feel confident about these 3 goals?</p>
+                            <a href="${item.video_url}" target="_blank" class="inline-flex items-center gap-2 mt-4 px-4 md:px-5 py-2 md:py-2.5 bg-white text-red-600 font-bold rounded-xl shadow-sm border border-red-100 hover:bg-red-50 transition-colors text-xs md:text-sm">
+                                <svg class="w-4 h-4 md:w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
                                 Watch Shorts Again
                             </a>
                         </div>
                         
                         <div class="space-y-3">
-                            <div class="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm">
-                                <span class="font-semibold text-gray-700 flex items-center gap-3"><span class="text-2xl">🥦</span> Local Ingredients</span>
-                                <div class="flex gap-2">
-                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_ingredients', 'yes')" class="px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-sm font-bold transition-colors">Yes 👍</button>
-                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_ingredients', 'no')" class="px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-bold transition-colors">Not sure 🤔</button>
+                            <div class="flex items-center justify-between bg-white p-3 md:p-4 rounded-2xl shadow-sm gap-2">
+                                <span class="font-bold text-gray-700 flex items-center gap-2 md:gap-3 text-sm md:text-base leading-tight min-w-0">
+                                    <span class="text-xl md:text-2xl flex-shrink-0">🥦</span> 
+                                    <span class="truncate md:whitespace-normal">Local Ingredients</span>
+                                </span>
+                                <div class="flex gap-1.5 md:gap-2 flex-shrink-0">
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_ingredients', 'yes')" class="px-2.5 md:px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-[10px] md:text-sm font-bold transition-colors whitespace-nowrap">Yes 👍</button>
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_ingredients', 'no')" class="px-2.5 md:px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-[10px] md:text-sm font-bold transition-colors whitespace-nowrap">Not sure 🤔</button>
                                 </div>
                             </div>
 
-                            <div class="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm">
-                                <span class="font-semibold text-gray-700 flex items-center gap-3"><span class="text-2xl">⏱️</span> In 30 Mins</span>
-                                <div class="flex gap-2">
-                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_time', 'yes')" class="px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-sm font-bold transition-colors">Yes 👍</button>
-                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_time', 'no')" class="px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-bold transition-colors">Not sure 🤔</button>
+                            <div class="flex items-center justify-between bg-white p-3 md:p-4 rounded-2xl shadow-sm gap-2">
+                                <span class="font-bold text-gray-700 flex items-center gap-2 md:gap-3 text-sm md:text-base leading-tight min-w-0">
+                                    <span class="text-xl md:text-2xl flex-shrink-0">⏱️</span> 
+                                    <span>In 30 Mins</span>
+                                </span>
+                                <div class="flex gap-1.5 md:gap-2 flex-shrink-0">
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_time', 'yes')" class="px-2.5 md:px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-[10px] md:text-sm font-bold transition-colors whitespace-nowrap">Yes 👍</button>
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_time', 'no')" class="px-2.5 md:px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-[10px] md:text-sm font-bold transition-colors whitespace-nowrap">Not sure 🤔</button>
                                 </div>
                             </div>
 
-                            <div class="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm">
-                                <span class="font-semibold text-gray-700 flex items-center gap-3"><span class="text-2xl">🔥</span> K-Flavor</span>
-                                <div class="flex gap-2">
-                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_taste', 'yes')" class="px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-sm font-bold transition-colors">Yes 👍</button>
-                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_taste', 'no')" class="px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-bold transition-colors">Not sure 🤔</button>
+                            <div class="flex items-center justify-between bg-white p-3 md:p-4 rounded-2xl shadow-sm gap-2">
+                                <span class="font-bold text-gray-700 flex items-center gap-2 md:gap-3 text-sm md:text-base leading-tight min-w-0">
+                                    <span class="text-xl md:text-2xl flex-shrink-0">🔥</span> 
+                                    <span>K-Flavor</span>
+                                </span>
+                                <div class="flex gap-1.5 md:gap-2 flex-shrink-0">
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_taste', 'yes')" class="px-2.5 md:px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-[10px] md:text-sm font-bold transition-colors whitespace-nowrap">Yes 👍</button>
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_taste', 'no')" class="px-2.5 md:px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-[10px] md:text-sm font-bold transition-colors whitespace-nowrap">Not sure 🤔</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
-            }   
+            }
 
             container.innerHTML = `
                 <div class="animate-slide-up">
