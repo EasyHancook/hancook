@@ -644,7 +644,13 @@
                         <div class="text-center mb-6">
                             <h3 class="font-display font-bold text-xl md:text-2xl text-indigo-900 mb-1">Ready to cook? 🎬</h3>
                             <p class="text-[11px] md:text-sm text-indigo-700 opacity-80">Do you feel confident about these goals?</p>
-                        </div>
+                            
+                            <a href="${item.video_url}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-white text-red-600 font-bold rounded-xl shadow-sm border border-red-100 hover:bg-red-50 transition-colors text-xs">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                Watch Shorts Again
+                            </a>
+                            
+                            </div>
                         
                         <div class="space-y-3">
                             ${['ingredients', 'time', 'taste'].map(type => {
