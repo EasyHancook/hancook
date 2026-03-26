@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hancook | Easy Korean Recipes</title>
+    <link rel="icon" href="images/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Outfit', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1',
+                        },
+                        sage: {
+                            50: '#f4f7f4', 100: '#e1ede2', 500: '#7fa982', 600: '#638d66',
+                        },
+                        accent: '#f97316'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.4s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fcfdfc;
+            color: #1a1c1a;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .recipe-step:nth-child(even) {
+            background-color: #f8faf9;
+        }
+        .image-placeholder {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+        .image-placeholder::after {
+            content: 'IMAGE';
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: rgba(0,0,0,0.1);
+            font-size: 2rem;
+        }
+        .has-image::after {
+            display: none; 
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="font-body transition-colors duration-500">
+
+    <div id="consent-screen" class="min-h-screen flex items-center justify-center p-4">
+        <div class="glass-card max-w-2xl w-full p-8 md:p-12 rounded-[2.5rem] animate-slide-up text-center">
+            <h1 class="font-display font-bold text-3xl md:text-4xl text-gray-800 mb-6">
+                Mapping the Heart of K-Food<br>
+                <span class="text-sage-600">with Local Soul.</span>
+            </h1>
+            
+            <div class="text-left text-gray-600 space-y-4 mb-8 leading-relaxed text-sm md:text-base p-6 bg-white/50 rounded-2xl border border-gray-100">
+                <p>Experience the core taste of Korea right in your kitchen.</p>
+                <p>Discover our unique one-dish menus that combine <strong>attractive Korean flavors</strong> with fresh <strong>local ingredients</strong>, all designed to be cooked in just <strong>30 minutes</strong>.</p>
+                
+                <div class="mt-6 p-4 bg-blue-50/50 border border-blue-100 rounded-xl text-sm text-blue-800 leading-relaxed">
+                    <p class="font-bold mb-1">🌱 Welcome to our Early Version!</p>
+                    <p>To make this app better, we've included several feedback buttons throughout the recipes. We truly value your honest opinions, but please feel free to skip any questions you find difficult to answer. Thank you for helping us grow!</p>
+                </div>
+
+                <p class="text-xs text-gray-500 mt-4 border-t border-gray-200 pt-4">
+                    * Please agree to the terms below to explore our recipes and experience the app.
+                </p>
+            </div>
+            
+            <div class="mb-6 max-w-xs mx-auto text-left">
+                <label for="beta-password" class="block text-sm font-semibold text-gray-700 mb-2 ml-1">Beta Access Code</label>
+                <input type="password" id="beta-password" 
+                       placeholder="Enter secret code" 
+                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-sage-500 focus:border-sage-500 outline-none transition-all text-center tracking-widest">
+            </div>
+
+            <label class="flex items-center justify-center gap-3 cursor-pointer mb-8 group">
+                <div class="relative flex items-center">
+                    <input type="checkbox" id="consent-checkbox" class="peer w-6 h-6 rounded-md border-gray-300 text-sage-600 focus:ring-sage-500 cursor-pointer transition-all">
+                </div>
+                <span class="text-gray-700 font-medium group-hover:text-gray-900 transition-colors">
+                    [Required] I agree to the app's terms of use and content policies.
+                </span>
+            </label>
+
+            <button onclick="enterApp()" class="w-full md:w-auto px-12 py-4 bg-sage-500 hover:bg-sage-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-sage-200 flex items-center justify-center gap-2 mx-auto">
+                Agree & Continue
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+            <p id="consent-error" class="text-red-500 text-sm mt-4 hidden animate-fade-in">You must agree to the terms to proceed.</p>
+        </div>
+    </div>
+    
+    <script>
+        function enterApp() {
+            const isAgreed = document.getElementById('consent-checkbox').checked;
+            const password = document.getElementById('beta-password').value;
+            const errorMsg = document.getElementById('consent-error');
+            const correctPassword = "hancook"; // 🔑 설정하신 암호
+
+            // 1. 동의 체크 확인
+            if (!isAgreed) {
+                errorMsg.innerText = "Please agree to the terms to proceed.";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            // 2. 비밀번호 확인
+            if (password !== correctPassword) {
+                errorMsg.innerText = "Incorrect access code. Please try again.";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            // 3. 모두 통과 시 앱 화면으로 진입
+            errorMsg.classList.add('hidden');
+            
+            // 동의 화면을 숨기고 메인 컨텐츠(있다면)를 보여줍니다.
+            document.getElementById('consent-screen').style.display = 'none';
+            
+            // 만약 메인 레이아웃의 ID가 'main-app'이라면 아래 줄 주석을 해제하세요.
+            // document.getElementById('main-app').classList.remove('hidden');
+            
+            alert("Welcome to Hancook! 🎉");
+        }
+
+        // 엔터키를 눌러도 비번 확인이 되도록 추가
+        document.getElementById('beta-password')?.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') enterApp();
+        });
+    </script>
+
+    <div id="app-wrapper" class="hidden">
+        <header class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+                <div id="app-title" class="font-display font-bold text-lg md:text-xl text-gray-800 leading-tight max-w-[60%] md:max-w-full cursor-pointer" onclick="showHome()">
+                    One-Dish Korean Meals
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="setLanguage('canada')" id="lang-ca" class="px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border border-gray-200">
+                        Canada
+                    </button>
+                    <button onclick="setLanguage('germany')" id="lang-de" class="px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 border border-gray-200">
+                        Germany
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content" class="pt-28 pb-12 px-4 max-w-7xl mx-auto min-h-screen"></main>
+    <div id="email-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-gray-900/40 backdrop-blur-sm transition-opacity">
+            <div class="glass-card max-w-md w-full p-8 rounded-3xl animate-slide-up relative">
+                <button onclick="window.closeEmailModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                
+                <h3 class="font-display font-bold text-2xl text-gray-800 mb-2">Get the PDF Recipe 💌</h3>
+                <p class="text-sm text-gray-600 mb-6">Enter your email to receive the grocery list and step-by-step PDF. <br><strong class="text-sage-600">Plus, get a chance for a 1:1 chef's tip!</strong></p>
+                
+                <div class="space-y-4">
+                    <input type="text" id="user-name" placeholder="Your Name" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sage-500 bg-white/50">
+                    <input type="email" id="user-email" placeholder="Your Email" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sage-500 bg-white/50">
+                    <input type="hidden" id="target-menu-id"> 
+                    
+                    <p class="text-[11px] text-gray-400 leading-tight px-1 mt-2 mb-4">
+                                * By submitting, you agree to receive our recipe updates. You can unsubscribe at any time.
+                            </p>
+
+                    <button onclick="window.submitEmailLead()" class="w-full py-4 bg-sage-500 hover:bg-sage-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-sage-200">
+                        Send to my Email 🚀
+                    </button>
+                </div>
+                <p id="email-success-msg" class="text-sage-600 text-sm font-bold mt-4 hidden text-center">Successfully sent! Please check your inbox.</p>
+            </div>
+        </div>
+    </div>
+<script type="module">
+        // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // 파이어베이스 설정 키 (나중에 진짜 키로 바꾸면 됩니다)
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+        apiKey: "AIzaSyAo3aUNmUrv6qlDynFR9JtiQJ2lKQ2ayzc",
+        authDomain: "easyhancook-302b2.firebaseapp.com",
+        projectId: "easyhancook-302b2",
+        storageBucket: "easyhancook-302b2.firebasestorage.app",
+        messagingSenderId: "213506634120",
+        appId: "1:213506634120:web:631de968fee1fed579ca3d",
+        measurementId: "G-B0LDKC3Z6J"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 버튼 클릭 시 작동할 피드백 전송 함수
+        window.submitFeedback = async function(menuId, feedbackType, feedbackValue) {
+            try {
+                await addDoc(collection(db, "ktastelabs_feedback"), {
+                    menuId: menuId,
+                    type: feedbackType,
+                    value: feedbackValue,
+                    country: currentLang, // 현재 언어(캐나다/독일)
+                    timestamp: serverTimestamp()
+                });
+                alert("Thank you for your valuable feedback! 💚");
+            } catch (e) {
+                console.warn("DB 연결 전 임시 저장: ", feedbackType, feedbackValue);
+                alert("Temporarily saved! (DB 연결 전입니다)");
+            }
+        };
+        // 👇👇 바로 여기! 여기에 이메일 관련 함수 3개를 넣으시면 됩니다 👇👇
+        window.openEmailModal = function(menuId) {
+            document.getElementById('target-menu-id').value = menuId;
+            document.getElementById('email-modal').classList.remove('hidden');
+            document.getElementById('email-success-msg').classList.add('hidden');
+        };
+
+        window.closeEmailModal = function() {
+            document.getElementById('email-modal').classList.add('hidden');
+        };
+
+        // ✨ 깔끔하게 정리된 최종 이메일 전송 함수
+        window.submitEmailLead = async function() {
+            const name = document.getElementById('user-name').value;
+            const email = document.getElementById('user-email').value;
+            const menuId = document.getElementById('target-menu-id').value;
+
+            // 필수 입력값 확인 (알림창 대신 가볍게 체크)
+            if (!name || !email || !email.includes('@')) {
+                alert("Please enter a valid name and email address.");
+                return;
+            }
+
+            try {
+                // 데이터 저장 실행
+                await addDoc(collection(db, "ktastelabs_leads"), {
+                    name: name,
+                    email: email,
+                    menuId: menuId,
+                    country: currentLang,
+                    status: "new",
+                    timestamp: serverTimestamp()
+                });
+                
+                // 성공 메시지 보여주기
+                const successMsg = document.getElementById('email-success-msg');
+                if (successMsg) successMsg.classList.remove('hidden');
+
+                // 2초 뒤에 팝업창 닫고 입력창 초기화
+                setTimeout(() => {
+                    window.closeEmailModal();
+                    if (successMsg) successMsg.classList.add('hidden');
+                    document.getElementById('user-name').value = ''; 
+                    document.getElementById('user-email').value = '';
+                }, 2000);
+                
+            } catch (e) {
+                console.error("Firebase save error: ", e);
+                alert("Sorry, there was an error. Please try again later.");
+            }
+        };
+        // 👆👆 여기까지 추가 👆👆
+    </script>
+    <script>
+        // === 동의 로직 ===
+        window.onload = () => {
+            if(localStorage.getItem('ktastelabs_agreed') === 'true') {
+                document.getElementById('consent-screen').classList.add('hidden');
+                document.getElementById('app-wrapper').classList.remove('hidden');
+                setLanguage('canada');
+            }
+        };
+
+        function enterApp() {
+            const isChecked = document.getElementById('consent-checkbox').checked;
+            const errorMsg = document.getElementById('consent-error');
+            if (isChecked) {
+                localStorage.setItem('ktastelabs_agreed', 'true');
+                document.getElementById('consent-screen').classList.add('hidden');
+                document.getElementById('app-wrapper').classList.remove('hidden');
+                setLanguage('canada');
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // ==========================================
+        // 1. 공통 메뉴 데이터 (육전, 제육, 비빔국수)
+        // ==========================================
+        const commonMenus = [
+            {
+                id: 'm2_yukjeon',
+                title: "Pork Yukjeon (Pan-fried Pork) & Spicy Soy Sauce",
+                description: "Commonly enjoyed as a side dish with rice or as a snack with drinks.",
+                spice_level: "Mild",
+                vegan_friendly: "N/A",
+                image_url: "images/m2_yukjeon/main.jpg",
+                ingredients_image_url: "images/m2_yukjeon/ingredients.jpg",
+                video_url: "https://youtu.be/W7G8Gqqs2ZY/shorts.mp4",
+                ingredients: [
+                    "300-500g Pork Loin (Fast Fry Cut, 0.3-0.5cm thick)",
+                    "2-3 Large eggs",
+                    "All-purpose Flour",
+                    "Salt, Pepper, Cooking oil",
+                    "Sauce: 2 Tbsp Soy Sauce, 1 Tbsp Vinegar, 1 Tbsp Water, 0.5 Tbsp Sugar, Crushed red pepper"
+                ],
+                instructions: [
+                    { 
+                        text: "Meat Preparation: Pat the pork with paper towels. Season with salt and pepper and let sit for 5-10 minutes.",
+                        tip: [
+                                "Let sit for 5-10 minutes to absorb flavor, but this can be skipped if you are in a hurry.",
+                                "If slices are thick, lightly pound with the back of a knife to tenderize."
+                        ],    
+                        image_url: "images/m2_yukjeon/step1.jpg"
+                    },
+                    { 
+                        text: "Coating: Beat eggs with a pinch of salt. Lightly coat both sides of the pork with flour, shaking off excess.", 
+                        tip: "A thin, even layer of flour helps the egg stick perfectly.",
+                        image_url: "images/m2_yukjeon/step2.jpg"
+                    },
+                    { 
+                        text: "Heat oil in a pan over medium-low heat. Dip into the egg wash. Fry the pork until golden brown on both sides.", 
+                        tip: "Pan-frying: Cook for about 3 minutes per side and ensure the pork is fully cooked.",
+                        image_url: "images/m2_yukjeon/step3.jpg"
+                    },
+                    { 
+                        text: "Prepare the dipping sauce. Serve the hot Yukjeon with the sauce.", 
+                        tip: "Sauce & Serve: Adjust the amount of red pepper to your desired spice level.",
+                        image_url: "images/m2_yukjeon/step4.jpg"
+                    }
+                ]
+            },
+            {
+                id: 'm3_soy_jeyuk',
+                title: "Soy Pork Stir-Fry (Soy Jeyuk-Bokkeum)",
+                description: "Best served over cooked rice to enjoy the deep, savory sauce.",
+                spice_level: "Mild",
+                vegan_friendly: "N/A",
+                image_url: "images/m3_soy_jeyuk/main.jpg",
+                ingredients_image_url: "images/m3_soy_jeyuk/ingredients.jpg",
+                //video_url: "videos/m3_soy_jeyuk/shorts.mp4",
+                ingredients: [
+                    "300g Pork Neck Steaks, boneless",
+                    "1 Small onion, 3-4 Green onions, Optional Add-ins: Mushrooms (Champignons), carrots, or bell peppers",
+                    "Sauce: 2-2.5 Tbsp Tamari Soy Sauce, 1 Tbsp Sugar, 1/4 tsp Ginger powder, 1 tsp Dehydrated minced garlic, Black pepper",
+                    "Final Touch: 0.5-1 tsp Balsamic vinegar, 1 Tbsp Avocado Oil"
+                ],
+                instructions: 
+                [
+                    { 
+                        text: "Prep: Slice pork neck against the grain (5-7mm). Thinly slice onions and green onions (2cm).",
+                        tip: "Slicing against the grain ensures the meat remains tender when cooked.",    
+                        image_url: "images/m3_soy_jeyuk/step1.jpg"
+                    },
+                    { 
+                        text: "Sugar-First Technique: Heat oil, sear pork. When color changes, sprinkle sugar and stir-fry for 3-4 mins.", 
+                        tip: "Melting sugar first caramelizes the meat, tenderizing it and adding a beautiful glaze.",
+                        image_url: "images/m3_soy_jeyuk/step2.jpg"
+                    },
+                    { 
+                        text: "Seasoning: Incorporate Tamari, ginger powder, rehydrated garlic, pepper, and crushed red pepper. Stir-fry for 2 mins until the meat is evenly coated and fragrant.", 
+                        //tip: "Adding dry red pepper flakes at this stage allows aromatic oils to infuse deeply.",
+                        image_url: "images/m3_soy_jeyuk/step3.jpg"
+                    },
+                    { 
+                        text: "Vegetables & Finish: Add prepared vegetables. Stir-fry for 2 mins. Turn off the heat, drizzle the balsamic vinegar, and toss lightly.", 
+                        tip: "Residual heat mellows the balsamic acidity, leaving a sophisticated aroma.",
+                        image_url: "images/m3_soy_jeyuk/step4.jpg"
+                    }
+                ]
+            },
+            {
+                id: 'm4_bibim_guksu',
+                title: "Gochujang Bibim Pasta",
+                description: "A modern twist on a Korean classic. Delicate angel hair pasta meets the bold, authentic spice of gochujang, balanced with the clean sweetness of maple syrup and a subtle hint of garlic. Refreshing, vibrant, and simple.",
+                spice_level: "Hot",
+                vegan_friendly: "Omit boiled eggs to make it 100% Vegan.",
+                image_url: "images/m4_bibim_guksu/main.jpg",
+                ingredients_image_url: "images/m4_bibim_guksu/ingredients.jpg",
+                video_url: "https://youtu.be/1gxF1C_B00o/shorts.mp4",
+                ingredients: [
+                    "200g Angel Hair Pasta (Capellini No.1)",
+                    "3 Tbsp Gochujang, 1-1.5 Tbsp Maple Syrup, 1 Tbsp Soy Sauce, 1.5 Tbsp Vinegar, 0.25 Tbsp Dehydrated Minced Garlic, 1 Tbsp Water",
+                    "Toppings: Boiled eggs, cucumber, baby greens, bell peppers"
+                ],
+                instructions: 
+                [
+                    { 
+                        text: "<span class='font-bold text-xl text-sage-700'>Mix Sauce: Whisk all sauce ingredients together until smooth.</span><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 Tbsp Gochujang</li><li>1–1.5 Tbsp Maple Syrup</li><li>1 Tbsp Soy Sauce</li><li>1.5 Tbsp Vinegar</li><li>0.25 Tbsp Dehydrated Minced Garlic</li><li>1 Tbsp Water</li></ul>",
+                        tip: "Preparing the sauce first allows the dehydrated garlic to rehydrate and the flavors to meld.",    
+                        image_url: "images/m4_bibim_guksu/step2.jpg"
+                    },
+                    { 
+                        text: "Cook & Rinse: Boil Pasta: Cook angel hair in salted boiling water for 5-7 minutes until soft, rinse lightly in cold water, and drain.", 
+                        tip: "A quick rinse stops the cooking process while preserving the pasta's soft, noodle-like texture",
+                        image_url: "images/m4_bibim_guksu/step1.jpg"
+                    },
+                    { 
+                        text: "Assemble: Place the pasta in bowls and arrange toppings on top.", 
+                        //tip: "",
+                        //image_url: "images/m4_bibim_guksu/step3.jpg"
+                    },
+                    { 
+                        text: "Serve: Pour the sauce over the dish. Mix just before eating.", 
+                        tip: "Pouring the sauce at the end prevents the flavor from fading over time and keeps vegetables crisp.",
+                        image_url: "images/m4_bibim_guksu/step4.jpg"
+                    }
+                ]
+            }
+        ];
+
+        // ==========================================
+        // 2. 앱 전체 데이터 (캐나다 & 독일 분리)
+        // ==========================================
+        const appData = {
+            canada: {
+                app_title: "One-Dish Korean Meals Made with Local Ingredients in Canada",
+                lang_name: "Canada",
+                labels: { spice: "Spice Level", vegan: "Vegan Friendly", enter: "View Recipe", shorts: "Watch Shorts", ingredients: "Ingredients", instructions: "Instructions", tip: "Chef's Tip", back: "Back to Menu", recipe_btn: "View Recipe Steps" },
+                menu_items: [
+                    {
+                        id: 'ca1',
+                        title: "Bibimbap: Korea's Signature Dish (Canadian Version)",
+                        description: "A fresh, plant-forward (eggs are optional) take on Korea's most iconic dish.",
+                        spice_level: "Medium",
+                        vegan_friendly: "Plant-forward (eggs are optional).",
+                        image_url: "images/m1_bibimbap_ca/main.jpg",
+                        ingredients_image_url: "images/m1_bibimbap_ca/ingredients.jpg",
+                        //video_url: "videos/m1_bibimbap_ca/shorts.mp4",
+                        ingredients: ["2 bowls of Steamed Rice", "Matchstick Carrots, Mushrooms, Baby Spinach, Mixed Greens", "Protein: 2 Eggs, Avocado oil, Salt", "Sauce: 3 Tbsp Gochujang, 0.5 Tbsp Maple Syrup, 0.5-1 Tbsp Vinegar, 1 Tbsp Water, 1 tsp Dehydrated Minced Garlic"],
+                        instructions: [
+                            {
+                                text: "<span class='font-bold text-xl text-sage-700'>Prepare the Classic Garlic Gochujang Sauce in a small bowl.</span><br><br>Mix the ingredients in a small bowl before you start cooking to let the dehydrated garlic rehydrate and the flavors meld.<br><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 Tbsp Gochujang</li><li>0.5 Tbsp Maple Syrup or Honey</li><li> 0.5–1 Tbsp Vinegar</li><li>1 Tbsp Water</li><li>1 tsp Dehydrated Minced Garlic</li></ul>",
+                                tip: "Mix this first to let the dehydrated garlic rehydrate and the flavors meld.",    
+                                image_url: "images/m1_bibimbap_ca/step1.jpg"
+                            },
+                    { 
+                        text: "One-Pan Method: In a large pan, sauté Mushrooms with a pinch of salt until golden. Add carrots for 1 minute, then top with spinach for 30 seconds until wilted.", 
+                        tip: "This one-pan approach streamlines the entire process, significantly reducing prep time and cleanup without sacrificing flavor.",
+                        image_url: "images/m1_bibimbap_ca/step2.jpg"
+                    },
+                    { 
+                        text: "Assemble and Mix: Fry eggs. Place rice, veggies, greens, and egg in bowls. Serve with 1–2 Tbsp of the Gochujang sauce and mix thoroughly.", 
+                        tip: "The runny yolk of a sunny-side up egg creates a rich coating that balances the spicy Gochujang sauce and the salted vegetables.",
+                        image_url: "images/m1_bibimbap_ca/step3.jpg"
+                    }
+                ]
+                    },
+                    ...commonMenus // 공통 메뉴 불러오기
+                ]
+            },
+            germany: {
+                app_title: "Koreanische Ein-Topf-Gerichte: Regional & Essenziell (Deutschland)",
+                lang_name: "Germany",
+                labels: { spice: "Schärfegrad", vegan: "Vegan-Option", enter: "Rezept ansehen", shorts: "Shorts ansehen", ingredients: "Zutaten", instructions: "Anleitung", tip: "Profi-Tipp", back: "Zurück zum Menü", recipe_btn: "Schritt-für-Schritt" },
+                menu_items: [
+                    {
+                        id: 'de1',
+                        title: "Bibimbap: Korea's Signature Dish (German Version)",
+                        description: "A fresh, plant-forward take on Korea's most beloved dish featuring smoky tofu and a savory balsamic-soy glaze.",
+                        spice_level: "Mild to Medium",
+                        vegan_friendly: "100% Plant-based with smoked tofu.",
+                        image_url: "images/m1_bibimbap_de/main.jpg",
+                        ingredients_image_url: "images/m1_bibimbap_de/ingredients.jpg",
+                        //video_url: "videos/m1_bibimbap_de/shorts.mp4",
+                        ingredients: ["2 bowls of cooked rice", "Carrots, Mushrooms, Spinach, Mixed Greens, Kohlrabi", "Protein: Smoked Tofu (Räuchertofu), 2 Eggs (optional)", "Sauce: 3 Tbsp Soy Sauce, 1 Tbsp Balsamic Vinegar, 1 Tbsp Water, 1 tsp Maple Syrup, 1 tsp Minced Garlic, Green Hot Pepper"],
+                        instructions: [
+                    {
+                                text: "<span class='font-bold text-xl text-sage-700'>Prepare the Garlic Balsamic Soy Sauce (Deep & Savory)</span><br><br>Mix the ingredients in a small bowl before you start cooking to let the dehydrated garlic rehydrate and the flavors meld.<br><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 Tbsp Soy Sauce</li><li>1 Tbsp Balsamic Vinegar</li><li>1 Tbsp Water</li><li>1 tsp Maple Syrup or Honey</li><li>1 tsp Dehydrated Minced Garlic</li><li>🌶️ Optional Kick: 0.5 to 1 Scharfe Peperoni (Highly recommended.)</li></ul>",
+                                tip: "Preparing the sauce first allows the dehydrated garlic to rehydrate and the flavors to meld beautifully.",    
+                                image_url: "images/m1_bibimbap_de/step1.jpg"
+                            },
+                    { 
+                        text: "One-Pan Method: Sauté smoked tofu until golden, then sauté mushrooms, carrots, and spinach.", 
+                        tip: "This one-pan approach streamlines the entire process, significantly reducing prep time and cleanup without sacrificing flavor.",
+                        image_url: [
+                                    "images/m1_bibimbap_de/step2.jpg",
+                                    "images/m1_bibimbap_de/step3.jpg"
+                    ]},
+                    { 
+                        text: "Assemble, Dress & Mix: Fry two eggs in the same pan, preferably sunny-side up. Arrange the sautéed vegetables, tofu, and fresh toppings on top of the rice. Add a fried egg, pour over the signature sauce, and mix thoroughly.", 
+                        tip: "Mix everything together thoroughly before taking your first bite!",
+                        image_url: "images/m1_bibimbap_de/step4.jpg"
+                    }
+                ]
+                    },
+                    ...commonMenus // 공통 메뉴 불러오기
+                ]
+            }
+        };
+
+        let currentLang = 'canada';
+
+        // ==========================================
+        // 3. 언어 전환 및 홈 화면 렌더링
+        // ==========================================
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('app-title').innerText = appData[lang].app_title;
+            const btnCa = document.getElementById('lang-ca');
+            const btnDe = document.getElementById('lang-de');
+            if(lang === 'canada') {
+                btnCa.classList.add('bg-sage-500', 'text-white', 'border-sage-600');
+                btnDe.classList.remove('bg-sage-500', 'text-white', 'border-sage-600');
+            } else {
+                btnDe.classList.add('bg-sage-500', 'text-white', 'border-sage-600');
+                btnCa.classList.remove('bg-sage-500', 'text-white', 'border-sage-600');
+            }
+            showHome();
+        }
+
+        function showHome() {
+            const container = document.getElementById('main-content');
+            const data = appData[currentLang];
+            
+            let html = `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in">`;
+            
+            data.menu_items.forEach(item => {
+                let buttonsHtml = `
+                    <div class="mt-auto"> 
+                        <button onclick="showRecipe('${item.id}')" class="w-full py-4 bg-sage-500 hover:bg-sage-600 text-white font-bold rounded-2xl transition-colors shadow-lg shadow-sage-200 flex items-center justify-center gap-2 group">
+                            ${data.labels.enter}
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </button>
+                    </div>
+                `;
+                
+                if(item.video_url) {
+                    buttonsHtml = `
+                        <div class="flex gap-2 w-full mt-auto"> 
+                            <button onclick="showRecipe('${item.id}')" class="flex-1 py-4 bg-sage-500 hover:bg-sage-600 text-white font-bold rounded-2xl transition-colors shadow-lg shadow-sage-200 flex items-center justify-center gap-2 group text-sm">
+                                ${data.labels.enter}
+                                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </button>
+                            <a href="${item.video_url}" target="_blank" class="flex-1 py-4 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-2xl transition-colors shadow-lg shadow-red-100 flex items-center justify-center gap-2 group border border-red-200 text-sm">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                ${data.labels.shorts || 'Shorts'}
+                            </a>
+                        </div>
+                    `;
+                }
+
+                let imageDiv = item.image_url 
+                    ? `<div class="h-56 image-placeholder has-image group-hover:scale-105 transition-transform duration-700" style="background-image: url('${item.image_url}')"></div>`
+                    : `<div class="h-56 image-placeholder group-hover:scale-105 transition-transform duration-700"></div>`;
+                
+                html += `
+                    <div class="glass-card rounded-3xl overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 flex flex-col h-full"> 
+                        ${imageDiv}
+                        <div class="p-8 flex flex-col flex-grow"> 
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display font-bold text-2xl text-gray-800">${item.title}</h3>
+                                <span class="bg-orange-50 text-accent text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider border border-orange-100">${item.spice_level}</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">${item.description}</p>
+                            
+                            ${item.vegan_friendly !== "N/A" ? `
+                            <div class="space-y-3 mb-8">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-sage-500"></div>
+                                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-tighter">${data.labels.vegan}</span>
+                                </div>
+                                <p class="text-xs text-gray-500 italic pl-4 border-l-2 border-sage-100">${item.vegan_friendly}</p>
+                            </div>
+                            ` : `<div class="mb-8"></div>`}
+                        
+                            ${buttonsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+            window.scrollTo({ top: 0, behavior: 'smooth' });  
+        }
+
+        // ==========================================
+        // 4. 레시피 확인 로직 (재료 확인 -> 요리 순서)
+        // ==========================================
+        function showRecipe(id) {
+            const data = appData[currentLang];
+            const item = data.menu_items.find(i => i.id === id);
+            const container = document.getElementById('main-content');
+            
+            let mainImageDiv = item.image_url 
+                ? `<div class="h-80 md:h-[500px] rounded-[2.5rem] image-placeholder has-image shadow-xl mb-8" style="background-image: url('${item.image_url}')"></div>`
+                : `<div class="h-80 md:h-[500px] rounded-[2.5rem] image-placeholder shadow-xl mb-8"></div>`;
+
+            let ingredientsImageDiv = item.ingredients_image_url 
+                ? `<div class="w-full h-48 md:h-64 rounded-[1.5rem] image-placeholder has-image shadow-sm mb-6" style="background-image: url('${item.ingredients_image_url}')"></div>` 
+                : ``;
+
+             // 🔥 쇼츠 영상 시청 후 자신감 평가 (비디오가 있을 때만 생성)
+            let shortsFeedbackHtml = '';
+            if (item.video_url && item.video_url.trim() !== '') {
+                shortsFeedbackHtml = `
+                    <div class="mt-12 mb-8 p-8 bg-indigo-50 rounded-[2.5rem] border border-indigo-100 shadow-sm">
+                        <div class="text-center mb-6">
+                            <h3 class="font-display font-bold text-2xl text-indigo-900 mb-2">Ready to cook? 🎬</h3>
+                            <p class="text-sm text-indigo-700">After watching the video, do you feel confident about these 3 goals?</p>
+                            <a href="${item.video_url}" target="_blank" class="inline-flex items-center gap-2 mt-4 px-5 py-2.5 bg-white text-red-600 font-bold rounded-xl shadow-sm border border-red-100 hover:bg-red-50 transition-colors text-sm">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                Watch Shorts Again
+                            </a>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm">
+                                <span class="font-semibold text-gray-700 flex items-center gap-3"><span class="text-2xl">🥦</span> Local Ingredients</span>
+                                <div class="flex gap-2">
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_ingredients', 'yes')" class="px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-sm font-bold transition-colors">Yes 👍</button>
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_ingredients', 'no')" class="px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-bold transition-colors">Not sure 🤔</button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm">
+                                <span class="font-semibold text-gray-700 flex items-center gap-3"><span class="text-2xl">⏱️</span> In 30 Mins</span>
+                                <div class="flex gap-2">
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_time', 'yes')" class="px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-sm font-bold transition-colors">Yes 👍</button>
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_time', 'no')" class="px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-bold transition-colors">Not sure 🤔</button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm">
+                                <span class="font-semibold text-gray-700 flex items-center gap-3"><span class="text-2xl">🔥</span> K-Flavor</span>
+                                <div class="flex gap-2">
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_taste', 'yes')" class="px-4 py-2 bg-gray-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-sm font-bold transition-colors">Yes 👍</button>
+                                    <button onclick="window.submitFeedback('${item.id}', 'confidence_taste', 'no')" class="px-4 py-2 bg-gray-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-bold transition-colors">Not sure 🤔</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }   
+
+            container.innerHTML = `
+                <div class="animate-slide-up">
+                    <button onclick="showHome()" class="flex items-center gap-2 text-sage-600 font-semibold mb-8 hover:text-sage-700 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        ${data.labels.back}
+                    </button>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                        <div class="sticky top-28">
+                            ${mainImageDiv}
+                            <div class="glass-card p-8 rounded-[2rem]">
+                                <h1 class="font-display font-bold text-4xl mb-4 text-gray-800">${item.title}</h1>
+                                
+                                <div class="flex flex-wrap gap-4 mb-6">
+                                    <div class="px-4 py-2 bg-orange-50 rounded-xl border border-orange-100 text-accent text-sm font-bold flex items-center">
+                                        ${data.labels.spice}: ${item.spice_level}
+                                    </div>
+                                    ${item.vegan_friendly !== "N/A" ? `
+                                    <div class="px-4 py-2 bg-sage-50 rounded-xl border border-sage-100 text-sage-600 flex flex-col justify-center">
+                                        <span class="text-sm font-bold">${data.labels.vegan}</span>
+                                        <span class="text-xs italic mt-0.5">${item.vegan_friendly}</span>
+                                    </div>
+                                    ` : ``}
+                                </div>
+
+                                <p class="text-gray-600 leading-relaxed">${item.description}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-8">
+                            <section class="glass-card p-10 rounded-[2.5rem]">
+                                <h2 class="font-display font-bold text-2xl mb-8 flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-lg bg-sage-500 flex items-center justify-center text-white text-sm">01</span>
+                                    ${data.labels.ingredients}
+                                </h2>
+                                
+                                ${ingredientsImageDiv}
+
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    ${item.ingredients.map(ing => `
+                                        <li class="flex items-start gap-3 text-gray-600">
+                                            <svg class="w-5 h-5 text-sage-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                            <span class="text-sm leading-snug">${ing}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                                
+                                <div class="mt-8 mb-4 p-6 bg-sage-50 rounded-2xl border border-sage-100 text-center">
+                                    <h4 class="font-bold text-sage-800 mb-4 text-sm md:text-base">Did you easily find these ingredients locally?</h4>
+                                    <div class="flex flex-wrap justify-center gap-2">
+                                        <button onclick="submitFeedback('${item.id}', 'ingredients', 'easy')" class="px-4 py-2 bg-white rounded-xl shadow-sm hover:bg-sage-100 transition-colors text-sm font-semibold text-gray-700">👍 Easy</button>
+                                        <button onclick="submitFeedback('${item.id}', 'ingredients', 'hard')" class="px-4 py-2 bg-white rounded-xl shadow-sm hover:bg-sage-100 transition-colors text-sm font-semibold text-gray-700">👎 Hard</button>
+                                        <button onclick="submitFeedback('${item.id}', 'ingredients', 'substitute')" class="px-4 py-2 bg-white rounded-xl shadow-sm hover:bg-sage-100 transition-colors text-sm font-semibold text-gray-700">💬 Substituted</button>
+                                    </div>
+                                </div>
+
+                                ${shortsFeedbackHtml}
+
+                                <button onclick="window.openEmailModal('${item.id}')" class="mt-8 mb-4 w-full py-4 bg-white border-2 border-sage-500 text-sage-600 hover:bg-sage-50 font-bold rounded-2xl transition-all shadow-md flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    Get PDF Recipe & Grocery List
+                                </button>
+                                <button onclick="showInstructions('${item.id}')" class="mt-10 w-full py-4 bg-gray-800 hover:bg-black text-white font-bold rounded-2xl transition-all shadow-xl flex items-center justify-center gap-2">
+                                    ${data.labels.recipe_btn}
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7-7-7-7"></path></svg>
+                                </button>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            `;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function showInstructions(id) {
+            const data = appData[currentLang];
+            const item = data.menu_items.find(i => i.id === id);
+            const container = document.getElementById('main-content');
+            
+            let stepsHtml = item.instructions.map((step, index) => {
+                
+                //let stepImageDiv = step.image_url 
+                   // ? `<div class="h-48 md:h-64 rounded-3xl image-placeholder has-image opacity-90 group-hover:opacity-100 transition-opacity" style="background-image: url('${step.image_url}')"></div>`
+                    //: `<div class="h-48 md:h-64 rounded-3xl image-placeholder opacity-60 group-hover:opacity-100 transition-opacity"></div>`;
+                   // : ``; // 👈 이미지가 없으면 빈 공간을 없앱니다!
+
+                let stepImageDiv = '';
+                if (Array.isArray(step.image_url)) {
+                    // 이미지가 여러 개(배열)일 경우: 나란히(Grid) 배치
+                    let imagesHtml = step.image_url.map(url => `
+                        <div class="h-48 md:h-64 rounded-3xl image-placeholder has-image opacity-90 group-hover:opacity-100 transition-opacity w-full" style="background-image: url('${url}')"></div>
+                    `).join('');
+                    stepImageDiv = `<div class="grid grid-cols-2 gap-4 mt-4 mb-2">${imagesHtml}</div>`;
+                } else if (step.image_url) {
+                    // 이미지가 1개(텍스트)일 경우: 기존처럼 꽉 차게 1장 배치
+                    stepImageDiv = `<div class="h-48 md:h-64 rounded-3xl image-placeholder has-image opacity-90 group-hover:opacity-100 transition-opacity mt-4 mb-2" style="background-image: url('${step.image_url}')"></div>`;
+                }
+
+                let tipHtml = '';
+                if (step.tip) {
+                    let tipContent = '';
+                    if (Array.isArray(step.tip)) {
+                        tipContent = step.tip.map(t => `<p class="mb-2 last:mb-0">${t}</p>`).join('');
+                    } else {
+                        tipContent = `<p>${step.tip}</p>`;
+                    }
+                    
+                    tipHtml = `
+                        <div class="bg-amber-50 border border-amber-100 p-6 rounded-2xl">
+                            <h4 class="text-amber-800 font-bold text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM5.884 6.607a1 1 0 011.414 0l.707.707a1 1 0 11-1.414 1.414l-.707-.707a1 1 0 010-1.414zm9.9 0a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM3 11a1 1 0 100-2H2a1 1 0 100 2h1zm15 0a1 1 0 100-2h-1a1 1 0 100 2h1zM5.05 15.05a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm9.9 0a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM10 11a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+                                ${data.labels.tip}
+                            </h4>
+                            <div class="text-amber-900 text-sm italic">${tipContent}</div>
+                        </div>
+                    `;
+                }
+
+                return `
+                <div class="recipe-step p-8 md:p-12 border-b border-gray-100 last:border-0 group">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="flex-shrink-0">
+                                <span class="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center font-display font-bold text-xl text-sage-600 border border-gray-50">
+                                    ${String(index + 1).padStart(2, '0')}
+                                </span>
+                            </div>
+                            <div class="flex-grow space-y-6">
+                                <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-medium">${step.text}</p>
+                                ${stepImageDiv}
+                                ${tipHtml}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="animate-fade-in pb-20">
+                    <div class="max-w-4xl mx-auto px-4">
+                        <button onclick="showRecipe('${item.id}')" class="flex items-center gap-2 text-sage-600 font-semibold mb-8 hover:text-sage-700 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                            Back to Ingredients
+                        </button>
+                        <h1 class="font-display font-bold text-4xl mb-12 text-gray-800">${item.title}: ${data.labels.instructions}</h1>
+                    </div>
+                    <div class="glass-card rounded-[3rem] overflow-hidden">
+                        ${stepsHtml}
+                    </div>
+            
+                    <div class="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-center w-10 h-10 bg-sage-50 text-sage-600 rounded-full mb-4 mx-auto text-xl">⏱️</div>
+                                <h3 class="font-display font-bold text-xl text-gray-800 mb-2 text-center">Did it take 30 minutes?</h3>
+                                
+                            </div>
+                            <div class="flex flex-col gap-3 mt-auto">
+                                <button onclick="window.submitFeedback('${item.id}', 'time', 'under_30')" class="w-full py-3 bg-gray-50 rounded-xl hover:bg-sage-100 transition-colors text-sm font-semibold text-gray-700">⚡ Under 30 mins</button>
+                                <button onclick="window.submitFeedback('${item.id}', 'time', 'about_30')" class="w-full py-3 bg-gray-50 rounded-xl hover:bg-sage-100 transition-colors text-sm font-semibold text-gray-700">👍 About 30 mins</button>
+                                <button onclick="window.submitFeedback('${item.id}', 'time', 'over_30')" class="w-full py-3 bg-gray-50 rounded-xl hover:bg-sage-100 transition-colors text-sm font-semibold text-gray-700">🐢 Over 30 mins</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-center w-10 h-10 bg-orange-50 text-accent rounded-full mb-4 mx-auto text-xl">🔥</div>
+                                <h3 class="font-display font-bold text-xl text-gray-800 mb-2 text-center">Did it taste as expected?</h3>
+                                
+                            </div>
+                            <div class="flex flex-col gap-3 mt-auto">
+                                <button onclick="window.submitFeedback('${item.id}', 'taste', 'expected')" class="w-full py-3 bg-gray-50 rounded-xl hover:bg-orange-100 transition-colors text-sm font-semibold text-gray-700">✨ Exactly what I expected</button>
+                                <button onclick="window.submitFeedback('${item.id}', 'taste', 'different_but_good')" class="w-full py-3 bg-gray-50 rounded-xl hover:bg-orange-100 transition-colors text-sm font-semibold text-gray-700">😋 Delicious, but different</button>
+                                <button onclick="window.submitFeedback('${item.id}', 'taste', 'needs_adjustment')" class="w-full py-3 bg-gray-50 rounded-xl hover:bg-orange-100 transition-colors text-sm font-semibold text-gray-700">🧂 Needs adjustment</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="mt-12 text-center">
+                        <button onclick="showHome()" class="px-10 py-5 bg-sage-500 text-white font-bold rounded-2xl shadow-xl hover:bg-sage-600 transition-all">
+                             ${data.labels.back}
+                        </button>
+                    </div>
+                </div>
+            `;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
