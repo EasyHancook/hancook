@@ -340,6 +340,7 @@
                 description: "Commonly enjoyed as a side dish with rice or as a snack with drinks.",
                 spice_level: "Mild",
                 vegan_friendly: "N/A",
+                servings: "2-3 servings",
                 image_url: "images/m2_yukjeon/main.jpg",
                 ingredients_image_url: "images/m2_yukjeon/ingredients.jpg",
                 video_url: "https://youtu.be/W7G8Gqqs2ZY/shorts.mp4",
@@ -382,6 +383,7 @@
                 description: "Best served over cooked rice to enjoy the deep, savory sauce.",
                 spice_level: "Mild",
                 vegan_friendly: "N/A",
+                servings: "2 servings",
                 image_url: "images/m3_soy_jeyuk/main.jpg",
                 ingredients_image_url: "images/m3_soy_jeyuk/ingredients.jpg",
                 //video_url: "videos/m3_soy_jeyuk/shorts.mp4",
@@ -422,6 +424,7 @@
                 description: "A modern twist on a Korean classic. Delicate angel hair pasta meets the bold, authentic spice of gochujang, balanced with the clean sweetness of maple syrup and a subtle hint of garlic. Refreshing, vibrant, and simple.",
                 spice_level: "Hot",
                 vegan_friendly: "Omit boiled eggs to make it 100% Vegan.",
+                servings: "2 servings",
                 image_url: "images/m4_bibim_guksu/main.jpg",
                 ingredients_image_url: "images/m4_bibim_guksu/ingredients.jpg",
                 video_url: "https://youtu.be/1gxF1C_B00o/shorts.mp4",
@@ -471,6 +474,7 @@
                         description: "A fresh, plant-forward (eggs are optional) take on Korea's most iconic dish.",
                         spice_level: "Medium",
                         vegan_friendly: "Plant-forward (eggs are optional).",
+                        servings: "2 servings",
                         image_url: "images/m1_bibimbap_ca/main.jpg",
                         ingredients_image_url: "images/m1_bibimbap_ca/ingredients.jpg",
                         //video_url: "videos/m1_bibimbap_ca/shorts.mp4",
@@ -507,6 +511,7 @@
                         description: "A fresh, plant-forward take on Korea's most beloved dish featuring smoky tofu and a savory balsamic-soy glaze.",
                         spice_level: "Mild to Medium",
                         vegan_friendly: "100% Plant-based with smoked tofu.",
+                        servings: "2 servings",
                         image_url: "images/m1_bibimbap_de/main.jpg",
                         ingredients_image_url: "images/m1_bibimbap_de/ingredients.jpg",
                         //video_url: "videos/m1_bibimbap_de/shorts.mp4",
@@ -720,6 +725,7 @@
                                 <h2 class="font-display font-bold text-2xl mb-8 flex items-center gap-3">
                                     <span class="w-8 h-8 rounded-lg bg-sage-500 flex items-center justify-center text-white text-sm">01</span>
                                     ${data.labels.ingredients}
+                                    ${item.servings ? `<span class="ml-auto px-3 py-1 bg-sage-50 text-sage-600 text-sm font-semibold rounded-full border border-sage-200 shadow-sm flex items-center gap-1.5">🍽️ ${item.servings}</span>` : ''}
                                 </h2>
                                 
                                 ${ingredientsImageDiv}
