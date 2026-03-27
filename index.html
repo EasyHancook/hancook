@@ -330,12 +330,49 @@
             }
         }
 
+        
+
         // ==========================================
-        // 1. 공통 메뉴 데이터 (육전, 제육, 비빔국수)
+        // 2. 앱 전체 데이터 (캐나다 & 독일 분리)
         // ==========================================
-        const commonMenus = [
+        const appData = {
+    // 1. Canada Data (English / Tbsp / IDs: ca1, ca2, ca3, ca4)
+    // ==========================================
+    canada: {
+        app_title: "One-Dish Korean Meals Made with Local Ingredients in Canada",
+        lang_name: "Canada",
+        labels: { spice: "Spice Level", vegan: "Vegan Friendly", enter: "View Recipe", shorts: "Watch Shorts", ingredients: "Ingredients", instructions: "Instructions", tip: "Chef's Tip", back: "Back to Menu", recipe_btn: "View Recipe Steps" },
+        menu_items: [
             {
-                id: 'm2_yukjeon',
+                id: 'ca1',
+                title: "Bibimbap: Korea's Signature Dish",
+                description: "A fresh, plant-forward take on Korea's most iconic dish.",
+                spice_level: "Medium",
+                vegan_friendly: "Plant-forward (eggs are optional).",
+                servings: "2 servings",
+                image_url: "images/m1_bibimbap_ca/main.jpg",
+                ingredients_image_url: "images/m1_bibimbap_ca/ingredients.jpg",
+                ingredients: ["2 bowls of steamed rice", "matchstick carrots, sliced button mushrooms, baby spinach, mixed greens", "2 eggs, cooking oil, salt", "Sauce: 3 Tbsp Gochujang, 0.5 Tbsp maple syrup, 0.5–1 Tbsp vinegar, 1 Tbsp water, 1 tsp dehydrated minced garlic"],
+                instructions: [
+                    { 
+                        text: "<span class='font-bold text-xl text-sage-700'>Prepare the Classic Garlic Gochujang Sauce in a small bowl.</span><br><br>Mix the ingredients in a small bowl before you start cooking.<br><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 Tbsp Gochujang</li><li>0.5 Tbsp maple syrup (or honey)</li><li>0.5–1 Tbsp vinegar</li><li>1 Tbsp water</li><li>1 tsp dehydrated minced garlic</li></ul>", 
+                        tip: ["Mix this first to let the dehydrated garlic rehydrate and the flavors meld."], 
+                        image_url: "images/m1_bibimbap_ca/step1.jpg" 
+                    },
+                    { 
+                        text: "One-Pan Method: In a large pan, sauté Mushrooms with oil and a pinch of salt until golden. Add carrots for 1 minute, then top with spinach for 30 seconds until wilted.", 
+                        tip: ["This one-pan approach streamlines the entire process, significantly reducing prep time and cleanup."], 
+                        image_url: "images/m1_bibimbap_ca/step2.jpg" 
+                    },
+                    { 
+                        text: "Assemble and Mix: Fry eggs. Place rice, veggies, greens, and egg in bowls. Serve with 1–2 Tbsp of the Gochujang sauce and mix thoroughly.", 
+                        tip: ["The runny yolk of a sunny-side up egg creates a rich coating that balances the spicy Gochujang sauce."], 
+                        image_url: "images/m1_bibimbap_ca/step3.jpg" 
+                    }
+                ]
+            },
+            {
+                id: 'ca2',
                 title: "Pork Yukjeon (Pan-fried Pork) & Spicy Soy Sauce",
                 description: "Commonly enjoyed as a side dish with rice or as a snack with drinks.",
                 spice_level: "Mild",
@@ -344,41 +381,32 @@
                 image_url: "images/m2_yukjeon/main.jpg",
                 ingredients_image_url: "images/m2_yukjeon/ingredients.jpg",
                 video_url: "https://youtu.be/W7G8Gqqs2ZY/shorts.mp4",
-                ingredients: [
-                    "300-500g Pork Loin (Fast Fry Cut, 0.3-0.5cm thick)",
-                    "2-3 Large eggs",
-                    "All-purpose Flour",
-                    "Salt, Pepper, Cooking oil",
-                    "Sauce: 2 Tbsp Soy Sauce, 1 Tbsp Vinegar, 1 Tbsp Water, 0.5 Tbsp Sugar, Crushed red pepper"
-                ],
+                ingredients: ["300-500g pork loin (fast fry cut, 0.3-0.5cm thick)", "2-3 large eggs", "all-purpose flour", "salt, pepper, cooking oil", "Sauce: 2 Tbsp soy sauce, 1 Tbsp vinegar, 1 Tbsp water, 0.5 Tbsp sugar, crushed red pepper"],
                 instructions: [
                     { 
-                        text: "Meat Preparation: Pat the pork with paper towels. Season with salt and pepper and let sit for 5-10 minutes.",
-                        tip: [
-                                "Let sit for 5-10 minutes to absorb flavor, but this can be skipped if you are in a hurry.",
-                                "If slices are thick, lightly pound with the back of a knife to tenderize."
-                        ],    
-                        image_url: "images/m2_yukjeon/step1.jpg"
+                        text: "Meat Preparation: Pat the pork with paper towels. Season with salt and pepper and let sit for 5-10 minutes.", 
+                        tip: ["Let sit for 10 minutes to absorb the seasoning, or proceed immediately if you are short on time."], 
+                        image_url: "images/m2_yukjeon/step1.jpg" 
                     },
                     { 
                         text: "Coating: Beat eggs with a pinch of salt. Lightly coat both sides of the pork with flour, shaking off excess.", 
-                        tip: "A thin, even layer of flour helps the egg stick perfectly.",
-                        image_url: "images/m2_yukjeon/step2.jpg"
+                        tip: ["A thin, even layer of flour helps the egg stick perfectly."], 
+                        image_url: "images/m2_yukjeon/step2.jpg" 
                     },
                     { 
-                        text: "Heat oil in a pan over medium-low heat. Dip into the egg wash. Fry the pork until golden brown on both sides.", 
-                        tip: "Pan-frying: Cook for about 3 minutes per side and ensure the pork is fully cooked.",
-                        image_url: "images/m2_yukjeon/step3.jpg"
+                        text: "Fry: Heat oil in a pan over medium-low heat. Dip into the egg wash. Fry the pork until golden brown on both sides.", 
+                        tip: ["Cook for about 3 minutes per side and ensure the pork is fully cooked."], 
+                        image_url: "images/m2_yukjeon/step3.jpg" 
                     },
                     { 
                         text: "Prepare the dipping sauce. Serve the hot Yukjeon with the sauce.", 
-                        tip: "Sauce & Serve: Adjust the amount of red pepper to your desired spice level.",
-                        image_url: "images/m2_yukjeon/step4.jpg"
+                        tip: ["Adjust the amount of red pepper to your desired spice level."], 
+                        image_url: "images/m2_yukjeon/step4.jpg" 
                     }
                 ]
             },
             {
-                id: 'm3_soy_jeyuk',
+                id: 'ca3',
                 title: "Soy Pork Stir-Fry (Soy Jeyuk-Bokkeum)",
                 description: "Best served over cooked rice to enjoy the deep, savory sauce.",
                 spice_level: "Mild",
@@ -386,161 +414,172 @@
                 servings: "2 servings",
                 image_url: "images/m3_soy_jeyuk/main.jpg",
                 ingredients_image_url: "images/m3_soy_jeyuk/ingredients.jpg",
-                //video_url: "videos/m3_soy_jeyuk/shorts.mp4",
-                ingredients: [
-                    "300g Pork Neck Steaks, boneless",
-                    "1 Small onion, 3-4 Green onions, Optional Add-ins: Mushrooms (Champignons), carrots, or bell peppers",
-                    "Sauce: 2-2.5 Tbsp Tamari Soy Sauce, 1 Tbsp Sugar, 1/4 tsp Ginger powder, 1 tsp Dehydrated minced garlic, Black pepper",
-                    "Cooking Oil",
-                    "Final Touch: 0.5-1 tsp Balsamic vinegar"
-                ],
-                instructions: 
-                [
-                    { 
-                        text: "Prep: Slice pork neck against the grain (Bite-sized). Thinly slice onions and green onions (2cm).",
-                        tip: "Slicing against the grain ensures the meat remains tender when cooked.",    
-                        image_url: "images/m3_soy_jeyuk/step1.jpg"
-                    },
-                    { 
-                        text: "Sugar-First Technique: Heat oil, sear pork. When color changes, sprinkle sugar and stir-fry for 3-4 mins.", 
-                        tip: "Melting sugar first caramelizes the meat, tenderizing it and adding a beautiful glaze.",
-                        image_url: "images/m3_soy_jeyuk/step2.jpg"
-                    },
-                    { 
-                        text: "Seasoning: Incorporate Tamari, ginger powder, rehydrated garlic, pepper, and crushed red pepper. Stir-fry for 2 mins until the meat is evenly coated and fragrant.", 
-                        //tip: "Adding dry red pepper flakes at this stage allows aromatic oils to infuse deeply.",
-                        image_url: "images/m3_soy_jeyuk/step3.jpg"
-                    },
-                    { 
-                        text: "Vegetables & Finish: Add prepared vegetables. Stir-fry for 2 mins. Turn off the heat, drizzle the balsamic vinegar, and toss lightly.", 
-                        tip: "Residual heat mellows the balsamic acidity, leaving a sophisticated aroma.",
-                        image_url: "images/m3_soy_jeyuk/step4.jpg"
-                    }
+                ingredients: ["300g pork neck steaks, boneless", "1 small onion, 3-4 green onions, optional add-ins: mushrooms, carrots, or peppers", "Sauce: 2-2.5 Tbsp Tamari soy sauce, 1 Tbsp sugar, 1/4 tsp ginger powder, 1 tsp dehydrated minced garlic, black pepper, 2–3 shakes of crushed red pepper (optional)", "cooking oil", "final touch: 0.5-1 tsp balsamic vinegar"],
+                instructions: [
+                    { text: "Prep: Slice pork neck against the grain (Bite-sized). Thinly slice onions and green onions (2cm).", 
+                      tip: ["Slicing against the grain ensures the meat remains tender when cooked."], 
+                      image_url: "images/m3_soy_jeyuk/step1.jpg" },
+                    { text: "Sugar-First Technique: Heat oil, sear pork. When color changes, sprinkle sugar and stir-fry for 3-4 mins.", 
+                      tip: ["Melting sugar first caramelizes the meat, tenderizing it and adding a beautiful glaze."], 
+                      image_url: "images/m3_soy_jeyuk/step2.jpg" },
+                    { text: "Seasoning: Incorporate Tamari, sugar, ginger powder, dehydrated minced garlic, pepper, and crushed red pepper(optional). Stir-fry for 2 mins.", 
+                      tip: ["Crushed red pepper cuts through the richness of the pork for a cleaner, balanced flavor."], 
+                      image_url: "images/m3_soy_jeyuk/step3.jpg" },
+                    { text: "Vegetables & Finish: Add prepared vegetables. Stir-fry for 2 mins. Turn off the heat, drizzle the balsamic vinegar.", 
+                      tip: ["Residual heat mellows the balsamic acidity."], 
+                      image_url: "images/m3_soy_jeyuk/step4.jpg" }
                 ]
             },
             {
-                id: 'm4_bibim_guksu',
+                id: 'ca4',
                 title: "Gochujang Bibim Pasta",
-                description: "A modern twist on a Korean classic. Delicate angel hair pasta meets the bold, authentic spice of gochujang, balanced with the clean sweetness of maple syrup and a subtle hint of garlic. Refreshing, vibrant, and simple.",
+                description: "A modern twist on a Korean classic. Delicate angel hair pasta meets the bold spice of gochujang.",
                 spice_level: "Hot",
                 vegan_friendly: "Omit boiled eggs to make it 100% Vegan.",
                 servings: "2 servings",
                 image_url: "images/m4_bibim_guksu/main.jpg",
                 ingredients_image_url: "images/m4_bibim_guksu/ingredients.jpg",
                 video_url: "https://youtu.be/1gxF1C_B00o/shorts.mp4",
-                ingredients: [
-                    "200g Angel Hair Pasta (Capellini No.1)",
-                    "3 Tbsp Gochujang, 1-1.5 Tbsp Maple Syrup, 1 Tbsp Soy Sauce, 1.5 Tbsp Vinegar, 0.25 Tbsp Dehydrated Minced Garlic, 1 Tbsp Water",
-                    "Toppings: Boiled eggs, cucumber, baby greens, bell peppers"
-                ],
-                instructions: 
-                [
+                ingredients: ["200g angel hair pasta", "3 Tbsp Gochujang, 1.5 Tbsp maple syrup, 1 Tbsp soy sauce, 1.5 Tbsp vinegar, 0.25 Tbsp dehydrated minced garlic, 1 Tbsp water", "Toppings: boiled eggs, julienned cucumber, baby greens"],
+                instructions: [
                     { 
-                        text: "<span class='font-bold text-xl text-sage-700'>Mix Sauce: Whisk all sauce ingredients together until smooth.</span><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 Tbsp Gochujang</li><li>1–1.5 Tbsp Maple Syrup</li><li>1 Tbsp Soy Sauce</li><li>1.5 Tbsp Vinegar</li><li>0.25 Tbsp Dehydrated Minced Garlic</li><li>1 Tbsp Water</li></ul>",
-                        tip: "Preparing the sauce first allows the dehydrated garlic to rehydrate and the flavors to meld.",    
-                        image_url: "images/m4_bibim_guksu/step2.jpg"
+                        text: "<span class='font-bold text-xl text-sage-700'>Mix Sauce: Whisk all sauce ingredients together until smooth.</span><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 Tbsp Gochujang</li><li>1.5 Tbsp maple syrup</li><li>1 Tbsp soy sauce</li><li>1.5 Tbsp vinegar</li><li>0.25 Tbsp dehydrated minced garlic</li><li>1 Tbsp water</li></ul>", 
+                        tip: ["Preparing the sauce first allows the dehydrated garlic to rehydrate."], 
+                        image_url: "images/m4_bibim_guksu/step2.jpg" 
                     },
-                    { 
-                        text: "Cook & Rinse: Boil Pasta: Cook angel hair in salted boiling water for 5-7 minutes until soft, rinse lightly in cold water, and drain.", 
-                        tip: "A quick rinse stops the cooking process while preserving the pasta's soft, noodle-like texture",
-                        image_url: "images/m4_bibim_guksu/step1.jpg"
-                    },
-                    { 
-                        text: "Assemble: Place the pasta in bowls and arrange toppings on top.", 
-                        //tip: "",
-                        //image_url: "images/m4_bibim_guksu/step3.jpg"
-                    },
-                    { 
-                        text: "Serve: Pour the sauce over the dish. Mix just before eating.", 
-                        tip: "Pouring the sauce at the end prevents the flavor from fading over time and keeps vegetables crisp.",
-                        image_url: "images/m4_bibim_guksu/step4.jpg"
-                    }
+                    { text: "Cook & Rinse: Boil Pasta for 5-7 mins until soft, rinse lightly in cold water, and drain.", 
+                      tip: ["A quick rinse stops the cooking process."], 
+                      image_url: "images/m4_bibim_guksu/step1.jpg" },
+                    { text: "Assemble & Serve: Place the pasta in bowls and arrange toppings. Pour the sauce over the dish.", 
+                      tip: ["Pouring the sauce at the end prevents the flavor from fading over time and keeps vegetables crisp."], 
+                      image_url: "images/m4_bibim_guksu/step4.jpg" }
                 ]
             }
-        ];
+        ]
+    },
 
-        // ==========================================
-        // 2. 앱 전체 데이터 (캐나다 & 독일 분리)
-        // ==========================================
-        const appData = {
-            canada: {
-                app_title: "One-Dish Korean Meals Made with Local Ingredients in Canada",
-                lang_name: "Canada",
-                labels: { spice: "Spice Level", vegan: "Vegan Friendly", enter: "View Recipe", shorts: "Watch Shorts", ingredients: "Ingredients", instructions: "Instructions", tip: "Chef's Tip", back: "Back to Menu", recipe_btn: "View Recipe Steps" },
-                menu_items: [
-                    {
-                        id: 'ca1',
-                        title: "Bibimbap: Korea's Signature Dish (Canadian Version)",
-                        description: "A fresh, plant-forward (eggs are optional) take on Korea's most iconic dish.",
-                        spice_level: "Medium",
-                        vegan_friendly: "Plant-forward (eggs are optional).",
-                        servings: "2 servings",
-                        image_url: "images/m1_bibimbap_ca/main.jpg",
-                        ingredients_image_url: "images/m1_bibimbap_ca/ingredients.jpg",
-                        //video_url: "videos/m1_bibimbap_ca/shorts.mp4",
-                        ingredients: ["2 bowls of Steamed Rice", "Matchstick Carrots, Sliced Button Mushrooms, Baby Spinach, Mixed Greens", "2 Eggs, Cooking oil, Salt", "Sauce: 3 Tbsp Gochujang, 0.5 Tbsp Maple Syrup, 0.5-1 Tbsp Vinegar, 1 Tbsp Water, 1 tsp Dehydrated Minced Garlic"],
-                        instructions: [
-                            {
-                                text: "<span class='font-bold text-xl text-sage-700'>Prepare the Classic Garlic Gochujang Sauce in a small bowl.</span><br><br>Mix the ingredients in a small bowl before you start cooking to let the dehydrated garlic rehydrate and the flavors meld.<br><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 Tbsp Gochujang</li><li>0.5 Tbsp Maple Syrup or Honey</li><li> 0.5–1 Tbsp Vinegar</li><li>1 Tbsp Water</li><li>1 tsp Dehydrated Minced Garlic</li></ul>",
-                                tip: "Mix this first to let the dehydrated garlic rehydrate and the flavors meld.",    
-                                image_url: "images/m1_bibimbap_ca/step1.jpg"
-                            },
+    // 2. Germany Data (German / EL, TL / IDs: de1, de2, de3, de4)
+    // ==========================================
+    germany: {
+        app_title: "Koreanische Ein-Topf-Gerichte: Regional & Essenziell (Deutschland)",
+        lang_name: "Germany",
+        labels: { spice: "Schärfegrad", vegan: "Vegan-Option", enter: "Rezept ansehen", shorts: "Shorts ansehen", ingredients: "Zutaten", instructions: "Anleitung", tip: "Profi-Tipp", back: "Zurück zum Menü", recipe_btn: "Schritt-für-Schritt" },
+        menu_items: [
+            {
+                id: 'de1',
+                title: "Bibimbap: Koreas Nationalgericht",
+                description: "Frische, pflanzliche Variante mit Räuchertofu und herzhafter Balsamico-Soja-Glasur.",
+                spice_level: "Mild bis Medium",
+                vegan_friendly: "100 % pflanzlich mit Räuchertofu.",
+                servings: "2 Portionen",
+                image_url: "images/m1_bibimbap_de/main.jpg",
+                ingredients_image_url: "images/m1_bibimbap_de/ingredients.jpg",
+                ingredients: ["2 Schalen gekochter Reis", "Karottenstifte, Champignons, Babyspinat, gemischte Blattsalate", "Protein: Räuchertofu, 2 Eier (optional)", "Sauce: 3 EL Sojasauce, 1 EL Balsamico-Essig, 1 EL Wasser, 1 TL Honig, 1 TL Knoblauchgranulat, ½ bis 1 gehackte scharfe Peperon", "Speiseöl, Salz"],
+                instructions: [
                     { 
-                        text: "One-Pan Method: In a large pan, sauté Mushrooms with oil and a pinch of salt until golden. Add carrots for 1 minute, then top with spinach for 30 seconds until wilted.", 
-                        tip: "This one-pan approach streamlines the entire process, significantly reducing prep time and cleanup without sacrificing flavor.",
-                        image_url: "images/m1_bibimbap_ca/step2.jpg"
+                        text: "<span class='font-bold text-xl text-sage-700'>Knoblauch-Balsamico-Sojasauce zubereiten.</span><br><br>Die Zutaten vor dem Kochen vermengen, damit sich die Aromen gut verbinden können.<br><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 EL Sojasauce</li><li>1 EL Balsamico-Essig</li><li>1 EL Wasser</li><li>1 TL Honig (oder Ahornsirup)</li><li>1 TL Knoblauchgranulat</li><li>🌶️ Optionale Schärfe: ½ bis 1 gehackte scharfe Chilischote (Sehr zu empfehlen.)</li></ul>", 
+                        tip: ["Die Sauce zuerst zubereiten, damit der getrocknete Knoblauch aufquellen kann."], 
+                        image_url: "images/m1_bibimbap_de/step1.jpg" 
                     },
                     { 
-                        text: "Assemble and Mix: Fry eggs. Place rice, veggies, greens, and egg in bowls. Serve with 1–2 Tbsp of the Gochujang sauce and mix thoroughly.", 
-                        tip: "The runny yolk of a sunny-side up egg creates a rich coating that balances the spicy Gochujang sauce and the salted vegetables.",
-                        image_url: "images/m1_bibimbap_ca/step3.jpg"
+                        text: "Ein-Pfannen-Methode: Räuchertofu in Öl goldbraun anbraten und beiseitestellen. In derselben Pfanne Pilze mit einer Prise Salz anbraten, bis sie goldbraun sind. Karotten (1 Min.) und zuletzt Spinat (30 Sek.) dazugeben, bis er zusammenfällt.", 
+                        tip: ["Diese Ein-Pfannen-Methode verkürzt die Vorbereitungszeit deutlich."], 
+                        image_url: ["images/m1_bibimbap_de/step2.jpg", "images/m1_bibimbap_de/step3.jpg"] 
+                    },
+                    { 
+                        text: "Anrichten & Mischen: Eier braten. Gemüse, Tofu und Toppings auf dem Reis anrichten. Sauce darüberträufeln und vermengen.", 
+                        tip: ["Alles vor dem ersten Bissen gründlich vermengen!"], 
+                        image_url: "images/m1_bibimbap_de/step4.jpg" 
                     }
-                ]
-                    },
-                    ...commonMenus // 공통 메뉴 불러오기
                 ]
             },
-            germany: {
-                app_title: "Koreanische Ein-Topf-Gerichte: Regional & Essenziell (Deutschland)",
-                lang_name: "Germany",
-                labels: { spice: "Schärfegrad", vegan: "Vegan-Option", enter: "Rezept ansehen", shorts: "Shorts ansehen", ingredients: "Zutaten", instructions: "Anleitung", tip: "Profi-Tipp", back: "Zurück zum Menü", recipe_btn: "Schritt-für-Schritt" },
-                menu_items: [
-                    {
-                        id: 'de1',
-                        title: "Bibimbap: Koreas Nationalgericht",
-                        description: "Frische, pflanzliche Variante von Koreas beliebtestem Gericht mit Räuchertofu und herzhafter Balsamico-Soja-Glasur.",
-                        spice_level: "Mild to Medium",
-                        vegan_friendly: "100 % pflanzlich mit Räuchertofu.",
-                        servings: "2 servings",
-                        image_url: "images/m1_bibimbap_de/main.jpg",
-                        ingredients_image_url: "images/m1_bibimbap_de/ingredients.jpg",
-                        //video_url: "videos/m1_bibimbap_de/shorts.mp4",
-                        ingredients: ["2 Schalen gekochter Reis", "Karottenstifte, Geschnittene Champignons, Babyspinat, gemischte Blattsalate", "Protein: Räuchertofu, 2 Eier (optional)", "Sauce: 3 EL Sojasauce, 1 EL Balsamico-Essig, 1 EL Wasser, 1 TL Honig (oder Ahornsirup), 1 TL gehackter Knoblauch, ½ bis 1 gehackte scharfe Peperon", "Speiseöl, Salz"],
-                        instructions: [
-                    {
-                                text: "<span class='font-bold text-xl text-sage-700'>Knoblauch-Balsamico-Sojasauce zubereiten (Kräftig & Herzhaft)</span><br><br>Die Zutaten vor dem Kochen in einer kleinen Schüssel vermengen, damit der getrocknete Knoblauch aufquellen und sich die Aromen gut verbinden können.<br><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 EL Sojasauce</li><li>1 EL Balsamico-Essig</li><li>1 EL Wasser</li><li>1 TL Honig (oder Ahornsirup)</li><li>1 TL gehackter Knoblauch</li><li>🌶️ Optionale Schärfe: ½ bis 1 gehackte scharfe Chilischote (Sehr zu empfehlen.)</li></ul>",
-                                tip: "Die Sauce zuerst zubereiten, damit der getrocknete Knoblauch aufquellen und sich die Aromen gut verbinden können.",    
-                                image_url: "images/m1_bibimbap_de/step1.jpg"
-                            },
+            {
+                id: 'de2',
+                title: "Pork Yukjeon & scharfe Sojasauce",
+                description: "In der Pfanne gebratenes Schweinefleisch, ideal als Beilage oder Snack.",
+                spice_level: "Mild",
+                vegan_friendly: "N/A",
+                servings: "2-3 Portionen",
+                image_url: "images/m2_yukjeon/main.jpg",
+                ingredients_image_url: "images/m2_yukjeon/ingredients.jpg",
+                video_url: "https://youtu.be/W7G8Gqqs2ZY/shorts.mp4",
+                ingredients: ["300-500g Schweinelende (Schnitzel-Schnitt)", "2-3 große Eier", "Mehl", "Speiseöl, Salz, Pfeffer", "Sauce: 2 EL Sojasauce, 1 EL Essig, 1 EL Wasser, 0,5 EL Zucker, Chiliflocken"],
+                instructions: [
                     { 
-                        text: "Ein-Pfannen-Methode: Räuchertofu in Öl goldbraun anbraten. Anschließend Pilze, Karotten und Spinat mit einer Prise Salz dazugeben und mitdünsten.", 
-                        tip: "Diese Ein-Pfannen-Methode vereinfacht den gesamten Ablauf und verkürzt die Vorbereitungs- und Reinigungszeit deutlich, ohne den Geschmack zu beeinträchtigen.",
-                        image_url: [
-                                    "images/m1_bibimbap_de/step2.jpg",
-                                    "images/m1_bibimbap_de/step3.jpg"
-                    ]},
+                        text: "Fleisch vorbereiten: Das Fleisch trocken tupfen. Mit Salz und Pfeffer würzen und 5-10 Minuten ziehen lassen.", 
+                        tip: ["Kurz ziehen lassen, damit die Gewürze besser einziehen. Bei Zeitmangel einfach direkt weitermachen."], 
+                        image_url: "images/m2_yukjeon/step1.jpg" 
+                    },
                     { 
-                        text: "Anrichten, Würzen & Mischen: In derselben Pfanne zwei Eier braten, am besten als Spiegeleier. Das gebratene Gemüse, den Tofu und die frischen Toppings auf dem Reis anrichten. Ein Spiegelei daraufgeben, die Sauce darüberträufeln und alles gründlich vermengen.", 
-                        tip: "Alles vor dem ersten Bissen gründlich vermengen!",
-                        image_url: "images/m1_bibimbap_de/step4.jpg"
+                        text: "Panieren: Panieren: Eier mit einer Prise Salz verquirlen. Das Fleisch von beiden Seiten leicht in Mehl wenden und überschüssiges Mehl abklopfen.", 
+                        tip: ["Eine dünne Mehlschicht hilft, dass das Ei perfekt haftet."], 
+                        image_url: "images/m2_yukjeon/step2.jpg" 
+                    },
+                    { 
+                        text: "Braten: Öl in einer Pfanne bei mittlerer bis schwacher Hitze erhitzen. Das Fleisch durch das verquirlte Ei ziehen und von beiden Seiten goldbraun anbraten.", 
+                        tip: ["Pro Seite ca. 3 Minuten braten, bis das Fleisch vollständig gar ist."], 
+                        image_url: "images/m2_yukjeon/step3.jpg" 
+                    },
+                    { 
+                        text: "Servieren: Dipping-Sauce vorbereiten und das heiße Yukjeon damit servieren.", 
+                        tip: ["Passen Sie die Schärfe der Sauce nach Belieben an."], 
+                        image_url: "images/m2_yukjeon/step4.jpg" 
                     }
                 ]
+            },
+            {
+                id: 'de3',
+                title: "Sojasauce-Schweinefleisch (Soy Jeyuk-Bokkeum)",
+                description: "Herzhaftes Pfannengericht, am besten mit warmem Reis serviert.",
+                spice_level: "Mild",
+                vegan_friendly: "N/A",
+                servings: "2 Portionen",
+                image_url: "images/m3_soy_jeyuk/main.jpg",
+                ingredients_image_url: "images/m3_soy_jeyuk/ingredients.jpg",
+                ingredients: ["300g Schweinenackensteaks", "1 kleine Zwiebel, 3-4 Frühlingszwiebeln", "Optionale Beilagen: Champignons, Karotten oder Paprika", "Sauce: 2-2,5 EL Tamari, 1 EL Zucker, 1/4 TL Ingwerpulver, 1 TL Knoblauchgranulat, schwarzer Pfeffer, 2–3 Spritzer Chiliflocken (optional)", "Speiseöl", "Finish: 0,5-1 TL Balsamico-Essig"],
+                instructions: [
+                    { text: "Vorbereitung: Fleisch gegen die Faser schneiden (mundgerechte Stücke). Zwiebeln in Streifen und Frühlingszwiebeln in 2 cm lange Stücke schneiden.", 
+                      tip: ["Das Schneiden gegen die Faser hält das Fleisch beim Garen zart."], 
+                      image_url: "images/m3_soy_jeyuk/step1.jpg" },
+                    { text: "Karamellisieren: Fleisch anbraten. Sobald es die Farbe ändert, Zucker hinzufügen und 3-4 Min. braten.", 
+                      tip: ["Das Vorab-Karamellisieren des Zuckers macht das Fleisch zart und sorgt für einen schönen Glanz."], 
+                      image_url: "images/m3_soy_jeyuk/step2.jpg" },
+                    { text: "Würzen: Tamari, Zucker, Ingwerpulver, Knoblauchgranulat, Pfeffer und Chiliflocken (optional) hinzufügen. 2 Min. unter Rühren anbraten.", 
+                      tip: ["Chiliflocken neutralisieren die Fettigkeit des Fleisches und sorgen für ein angenehm leichtes Aroma."], 
+                      image_url: "images/m3_soy_jeyuk/step3.jpg" },
+                    { text: "Gemüse & Abschluss: Vorbereitetes Gemüse hinzufügen. 2 Min. unter Rühren anbraten. Hitze ausschalten, Balsamico-Essig darüberträufeln und kurz schwenken.", 
+                      tip: ["Die Resthitze mildert die Säure und hinterlässt ein feines Aroma."], 
+                      image_url: "images/m3_soy_jeyuk/step4.jpg" }
+                ]
+            },
+            {
+                id: 'de4',
+                title: "Gochujang Bibim Pasta",
+                description: "Moderne Variante eines koreanischen Klassikers. Capellini-Pasta trifft auf die Schärfe von Gochujang und Ahornsirup.",
+                spice_level: "Scharf",
+                vegan_friendly: "Ohne Eier zubereiten, um es 100 % vegan zu machen.",
+                servings: "2 Portionen",
+                image_url: "images/m4_bibim_guksu/main.jpg",
+                ingredients_image_url: "images/m4_bibim_guksu/ingredients.jpg",
+                video_url: "https://youtu.be/1gxF1C_B00o/shorts.mp4",
+                ingredients: ["200g Angel Hair Pasta (Capellini)", "Sauce: 3 EL Gochujang, 1 EL Honig (oder 1,5 Ahornsirup), 1 EL Sojasauce, 1,5 EL Essig, 0,25 EL Knoblauchgranulat, 1 EL Wasser", "Toppings: gekochte Eier, Gurke in feinen Streifen, Babysalat"],
+                instructions: [
+                    { 
+                        text: "<span class='font-bold text-xl text-sage-700'>Sauce mischen: Alle Zutaten glatt rühren.</span><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 EL Gochujang</li><li>1 EL Honig (oder 1,5 Ahornsirup)</li><li>1 EL Sojasauce</li><li>1,5 EL Essig</li><li>0,25 EL Knoblauchgranulat</li><li>1 EL Wasser</li></ul>", 
+                        tip: ["Die Sauce zuerst mischen, damit sich die Aromen verbinden können."], 
+                        image_url: "images/m4_bibim_guksu/step2.jpg" 
                     },
-                    ...commonMenus // 공통 메뉴 불러오기
+                    { text: "Kochen & Abschrecken: Pasta 5–7 Min. weich kochen, kurz mit kaltem Wasser abschrecken und abtropfen lassen.", 
+                     tip: ["Kaltes Abspülen stoppt den Garvorgang 및 bewahrt die Textur."], 
+                     image_url: "images/m4_bibim_guksu/step1.jpg" },
+                   { text: "Anrichten & Servieren: Pasta und Toppings anrichten. Sauce kurz vor dem Essen hinzufügen und vermengen.", 
+                    tip: ["Die Sauce erst am Ende dazugeben. Dies verhindert Geschmacksverlust und hält das Gemüse knackig."], 
+                    image_url: "images/m4_bibim_guksu/step4.jpg" }
                 ]
             }
-        };
-
+        ]
+    }
+};
         let currentLang = 'canada';
 
         // ==========================================
