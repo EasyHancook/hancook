@@ -523,7 +523,7 @@
                     { 
                         text: "Servieren: Dipping-Sauce vorbereiten und das heiße Yukjeon damit servieren.", 
                         tip: ["Passen Sie die Schärfe der Sauce nach Belieben an."], 
-                        image_url: "images/m2_yukjeon/step4.jpg" 
+                        image_url: "images/m2_yukjeon/step4_1.jpg" 
                     }
                 ]
             },
@@ -567,7 +567,7 @@
                     { 
                         text: "<span class='font-bold text-xl text-sage-700'>Sauce mischen: Alle Zutaten glatt rühren.</span><ul class='list-disc pl-5 mt-4 space-y-1 text-base text-gray-600'><li>3 EL Gochujang</li><li>1 EL Honig (oder 1,5 Ahornsirup)</li><li>1 EL Sojasauce</li><li>1,5 EL Essig</li><li>0,25 EL Knoblauchgranulat</li><li>1 EL Wasser</li></ul>", 
                         tip: ["Die Sauce zuerst mischen, damit sich die Aromen verbinden können."], 
-                        image_url: "images/m4_bibim_guksu/step2.jpg" 
+                        image_url: "images/m4_bibim_guksu/step2_1.jpg" 
                     },
                     { text: "Kochen & Abschrecken: Pasta 5–7 Min. weich kochen, kurz mit kaltem Wasser abschrecken und abtropfen lassen.", 
                      tip: ["Kaltes Abspülen stoppt den Garvorgang 및 bewahrt die Textur."], 
@@ -820,16 +820,19 @@
 
                 let stepImageDiv = '';
                 if (Array.isArray(step.image_url)) {
-                    // 이미지가 여러 개(배열)일 경우: 나란히(Grid) 배치
                     let imagesHtml = step.image_url.map(url => `
-                        <div class="h-48 md:h-64 rounded-3xl image-placeholder has-image opacity-90 group-hover:opacity-100 transition-opacity w-full" style="background-image: url('${url}')"></div>
+                        <div class="aspect-video rounded-3xl image-placeholder has-image relative overflow-hidden bg-white w-full">
+                            <img src="${url}" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" alt="Recipe step image" />
+                        </div>
                     `).join('');
                     stepImageDiv = `<div class="grid grid-cols-2 gap-4 mt-4 mb-2">${imagesHtml}</div>`;
                 } else if (step.image_url) {
-                    // 이미지가 1개(텍스트)일 경우: 기존처럼 꽉 차게 1장 배치
-                    stepImageDiv = `<div class="h-48 md:h-64 rounded-3xl image-placeholder has-image opacity-90 group-hover:opacity-100 transition-opacity mt-4 mb-2" style="background-image: url('${step.image_url}')"></div>`;
+                    stepImageDiv = `
+                        <div class="aspect-video rounded-3xl image-placeholder has-image relative overflow-hidden bg-white w-full mt-4 mb-2">
+                            <img src="${step.image_url}" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" alt="Recipe step image" />
+                        </div>
+                    `;
                 }
-
                 let tipHtml = '';
                 if (step.tip) {
                     let tipContent = '';
